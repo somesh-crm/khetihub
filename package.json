@@ -1,0 +1,15 @@
+{
+  "name": "khetihub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KhetiHub - mobile-first tractor information marketplace (React + Vite + Tailwind + Express + SQLite)",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "dev": "concurrently -n backend,frontend -c green,cyan \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "start": "npm --prefix backend run dev & npm --prefix frontend run dev",
+    "seed": "npm --prefix backend run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

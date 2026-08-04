@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-gray-50 text-gray-800 font-sans antialiased;
+  }
+  input[type='range'] {
+    @apply appearance-none bg-transparent w-full;
+  }
+  input[type='range']::-webkit-slider-runnable-track {
+    @apply h-1.5 rounded-full bg-gray-200;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    @apply appearance-none mt-[-5px] h-4 w-4 rounded-full bg-kheti-900 cursor-pointer shadow;
+  }
+  input[type='range']::-moz-range-track {
+    @apply h-1.5 rounded-full bg-gray-200;
+  }
+  input[type='range']::-moz-range-thumb {
+    @apply h-4 w-4 rounded-full bg-kheti-900 cursor-pointer border-0;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4;
+  }
+  .section-title {
+    @apply text-lg font-extrabold text-gray-900 flex items-center gap-2;
+  }
+  .section-title::after {
+    content: '';
+    @apply h-1 flex-1 rounded bg-gradient-to-r from-kheti-600/40 to-transparent;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1 rounded-full bg-kheti-900 text-white font-semibold px-5 py-2.5 active:scale-[0.98] transition;
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-1 rounded-full bg-accent-500 text-white font-semibold px-5 py-2.5 active:scale-[0.98] transition;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-1 rounded-full border border-kheti-900 text-kheti-900 font-semibold px-5 py-2.5 bg-white active:scale-[0.98] transition;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-card overflow-hidden;
+  }
+  .pill {
+    @apply inline-flex items-center rounded-full bg-kheti-50 text-kheti-900 text-xs font-semibold px-3 py-1;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-gray-200 bg-white text-gray-700 text-sm font-medium px-4 py-2 active:bg-gray-100 transition whitespace-nowrap;
+  }
+  .chip-active {
+    @apply border-kheti-900 bg-kheti-900 text-white;
+  }
+  .hscroll {
+    @apply flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x;
+  }
+  .hscroll > * {
+    @apply snap-start shrink-0;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
