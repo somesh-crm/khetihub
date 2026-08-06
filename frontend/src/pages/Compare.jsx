@@ -26,21 +26,23 @@ export default function Compare() {
   const { tractors, remove, clear, toggle } = useCompareStore();
   const [params, setParams] = useSearchParams();
 
-  const slugs = tractors.map((t) => t.slug).join(',');
+  const addParam = params.get('add');
+  const storeSlugs = tractors.map((t) => t.slug).join(',');
+  const slugs = addParam || storeSlugs;
   const { data, loading } = useFetch(() => (slugs ? Promise.all(slugs.split(',').map((s) => api.tractor(s))) : Promise.resolve([])), [slugs]);
 
   useEffect(() => {
-    const add = params.get('add');
-    if (add && !loading && data?.length) {
-      const toAdd = add.split(',').slice(0, 3);
-      toAdd.forEach((slug) => {
-        const t = data.find((d) => d.slug === slug);
-        if (t && !tractors.some((x) => x.id === t.id) && tractors.length < 3) toggle(t);
-      });
-      params.delete('add');
-      setParams(params, { replace: true });
-    }
-  }, [params, data, loading, tractors, toggle, setParams]);
+    if (!addParam || loading || !data?.length) return;
+    const toAdd = addParam.split(',').slice(0, 3);
+    toAdd.forEach((slug) => {
+      const t = data.find((d) => d.slug === slug);
+      if (t && !tractors.some((x) => x.id === t.id) && tractors.length < 3) toggle(t);
+    });
+    const next = new URLSearchParams(params);
+    next.delete('add');
+    setParams(next, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addParam, data, loading]);
 
   const items = data || [];
 

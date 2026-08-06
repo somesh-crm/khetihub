@@ -239,8 +239,10 @@ const DesktopHeader = () => {
       <nav className="bg-white relative z-50 shadow-nav border-b-[2px] border-primary">
         <div className="container-x flex items-stretch">
           {navItems.map((item) => (
-            <div key={item.label} className="relative group" ref={item.group === activeDropdown ? dropdownRef : null}>
-              <Link to={item.to} onClick={() => setActiveDropdown(activeDropdown === item.group ? null : item.group)}
+            <div key={item.label} className="relative group"
+              onMouseEnter={() => item.group && setActiveDropdown(item.group)}
+              onMouseLeave={() => item.group && setActiveDropdown(null)}>
+              <Link to={item.to}
                 className="flex items-center gap-1.5 px-5 py-4 text-sm font-semibold text-gray-main border-b-4 border-transparent hover:text-primary hover:border-primary hover:bg-green-light transition">
                 {item.label}
                 {item.group && <IconChevronDown className={`h-3.5 w-3.5 transition-transform ${activeDropdown === item.group ? 'rotate-180' : ''}`} />}
