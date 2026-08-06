@@ -29,20 +29,20 @@ export default function Sell() {
     }
   };
 
-  const input = 'w-full rounded-lg border border-gray-300 p-3 text-sm focus:border-kheti-900 outline-none bg-white';
-  const label = 'text-xs font-bold text-gray-500 uppercase mb-1 block';
+  const input = 'w-full rounded-lg border border-gray-light bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-green-main';
+  const label = 'text-xs font-bold text-gray-dark uppercase mb-1 block';
 
   if (submitted) {
     return (
       <div className="container-x pt-10 pb-16 text-center max-w-md">
-        <div className="h-16 w-16 mx-auto rounded-full bg-kheti-100 flex items-center justify-center text-3xl text-kheti-900">✓</div>
-        <h1 className="text-xl font-extrabold text-gray-900 mt-4">Request Submitted!</h1>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+        <div className="h-16 w-16 mx-auto rounded-full bg-green-mint flex items-center justify-center text-3xl text-primary">✓</div>
+        <h1 className="text-xl font-extrabold text-ink mt-4">Request Submitted!</h1>
+        <p className="text-sm text-gray-main mt-2 leading-relaxed">
           Thank you {form.name.split(' ')[0] || ''}! Our team will contact you at <b>{form.phone}</b> to verify details and list your {type === 'implement' ? 'implement' : 'tractor'} on KhetiHub.
         </p>
         <div className="flex gap-2 justify-center mt-6">
-          <Link to="/used" className="btn-primary">Browse Used Tractors</Link>
-          <Link to="/" className="btn-outline">Go Home</Link>
+          <Link to="/used" className="btn-green-sm">Browse Used Tractors</Link>
+          <Link to="/" className="btn-green-sm !bg-white !text-primary border border-primary hover:!bg-green-lighter">Go Home</Link>
         </div>
       </div>
     );
@@ -50,19 +50,19 @@ export default function Sell() {
 
   return (
     <div className="container-x pt-6 pb-10 max-w-2xl">
-      <h1 className="text-xl font-extrabold text-gray-900">Sell Your {type === 'implement' ? 'Implement' : 'Tractor'}</h1>
-      <p className="text-sm text-gray-500 mt-1">Connect with genuine buyers and get the best price</p>
+      <h1 className="sec-title mb-4 md:mb-6">Sell Your {type === 'implement' ? 'Implement' : 'Tractor'}</h1>
+      <p className="text-sm text-gray-main -mt-2">Connect with genuine buyers and get the best price</p>
 
       <div className="flex gap-2 mt-4">
-        <button onClick={() => setType('tractor')} className={`flex-1 rounded-full py-3 text-sm font-bold transition ${type === 'tractor' ? 'bg-kheti-900 text-white' : 'bg-white border border-gray-300 text-gray-700'}`}>
+        <button onClick={() => setType('tractor')} className={`flex-1 rounded-full py-3 text-sm font-bold transition ${type === 'tractor' ? 'bg-primary text-white' : 'bg-white border border-gray-light text-ink'}`}>
           Tractor
         </button>
-        <button onClick={() => setType('implement')} className={`flex-1 rounded-full py-3 text-sm font-bold transition ${type === 'implement' ? 'bg-kheti-900 text-white' : 'bg-white border border-gray-300 text-gray-700'}`}>
+        <button onClick={() => setType('implement')} className={`flex-1 rounded-full py-3 text-sm font-bold transition ${type === 'implement' ? 'bg-primary text-white' : 'bg-white border border-gray-light text-ink'}`}>
           Implement
         </button>
       </div>
 
-      <form onSubmit={submit} className="card p-5 mt-4 space-y-4">
+      <form onSubmit={submit} className="rounded-2xl border border-gray-light bg-white p-5 mt-4 space-y-4 shadow-card">
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
             <label className={label}>Your Name *</label>
@@ -109,10 +109,10 @@ export default function Sell() {
         </div>
         <div>
           <label className={label}>Condition</label>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {['Excellent', 'Good', 'Fair', 'Needs Repair'].map((c) => (
               <button type="button" key={c} onClick={() => setForm({ ...form, condition: c })}
-                className={`chip ${form.condition === c ? 'chip-active' : ''}`}>{c}</button>
+                className={`tab-pill !px-4 ${form.condition === c ? 'tab-pill-active' : 'tab-pill-inactive'}`}>{c}</button>
             ))}
           </div>
         </div>
@@ -121,10 +121,10 @@ export default function Sell() {
           <textarea rows="3" value={form.notes} onChange={set('notes')} placeholder="Any details like new tyres, service history, etc." className={input} />
         </div>
         {error && <p className="text-red-500 text-xs">{error}</p>}
-        <button type="submit" disabled={sending} className="btn-accent w-full disabled:opacity-60">
+        <button type="submit" disabled={sending} className="btn-green-sm w-full justify-center disabled:opacity-60">
           {sending ? 'Submitting...' : 'Submit for Sale'}
         </button>
-        <p className="text-[11px] text-gray-400 text-center">Our team will verify the details and contact you within 24 hours.</p>
+        <p className="text-[11px] text-gray-main text-center">Our team will verify the details and contact you within 24 hours.</p>
       </form>
     </div>
   );

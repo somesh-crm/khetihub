@@ -21,16 +21,16 @@ export default function Admin() {
     <div className="container-x pt-6 pb-10">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-extrabold text-gray-900">KhetiHub Admin / CRM</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Manage tractors, products, listings and customer requests</p>
+          <h1 className="sec-title mb-4 md:mb-6">KhetiHub Admin / CRM</h1>
+          <p className="text-sm text-gray-main">Manage tractors, products, listings and customer requests</p>
         </div>
-        <span className="pill bg-amber-50 text-amber-600">Demo</span>
+        <span className="rounded-full px-2 py-0.5 text-xs font-bold bg-orange-main text-white">Demo</span>
       </div>
 
-      <div className="hscroll hide-scrollbar mt-4">
+      <div className="hide-scrollbar mt-4 flex items-center gap-2 overflow-x-auto">
         {TABS.map((t) => (
           <button key={t.key} onClick={() => setTab(t.key)}
-            className={`chip ${tab === t.key ? 'chip-active' : ''}`}>{t.label}</button>
+            className={`tab-pill !px-4 ${tab === t.key ? 'tab-pill-active' : 'tab-pill-inactive'}`}>{t.label}</button>
         ))}
       </div>
 
@@ -62,39 +62,39 @@ function Dashboard({ onNavigate }) {
     <div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {stats.map(([label, count, key]) => (
-          <button key={key} onClick={() => onNavigate(key)} className="card p-4 text-left active:scale-[0.98] transition">
-            <div className="text-2xl font-black text-kheti-900">{count}</div>
-            <div className="text-xs font-semibold text-gray-500 mt-1">{label}</div>
+          <button key={key} onClick={() => onNavigate(key)} className="rounded-2xl border border-gray-light bg-white shadow-card p-4 text-left active:scale-[0.98] transition">
+            <div className="text-2xl font-black text-primary">{count}</div>
+            <div className="text-xs font-semibold text-gray-main mt-1">{label}</div>
           </button>
         ))}
       </div>
 
       <div className="grid md:grid-cols-2 gap-4 mt-5">
-        <div className="card p-4">
+        <div className="rounded-2xl border border-gray-light bg-white shadow-card p-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-bold text-gray-900">Recent Sell Requests</h3>
-            <span className="pill bg-accent-50 text-accent-500">{data.pendingSell} New</span>
-            <button onClick={() => onNavigate('sell_requests')} className="text-xs font-bold text-kheti-900">View All</button>
+            <h3 className="font-bold text-ink">Recent Sell Requests</h3>
+            <span className="rounded-full px-2 py-0.5 text-xs font-bold bg-orange-main text-white">{data.pendingSell} New</span>
+            <button onClick={() => onNavigate('sell_requests')} className="text-xs font-bold text-primary hover:text-secondary">View All</button>
           </div>
-          {data.recentSellRequests.length === 0 && <p className="text-sm text-gray-400 text-center py-6">No sell requests yet</p>}
+          {data.recentSellRequests.length === 0 && <p className="text-sm text-gray-main text-center py-6">No sell requests yet</p>}
           {data.recentSellRequests.map((r) => (
-            <div key={r.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+            <div key={r.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
               <div>
-                <div className="text-sm font-semibold text-gray-800">{r.name} - {r.brand} {r.model}</div>
-                <div className="text-xs text-gray-400">{r.location} {r.state} - ₹ {r.expected_price.toLocaleString('en-IN')}</div>
+                <div className="text-sm font-semibold text-ink">{r.name} - {r.brand} {r.model}</div>
+                <div className="text-xs text-gray-main">{r.location} {r.state} - ₹ {r.expected_price.toLocaleString('en-IN')}</div>
               </div>
-              <span className="pill bg-kheti-50 text-kheti-900">{r.status}</span>
+              <span className="rounded-full px-2 py-0.5 text-xs font-bold bg-green-lighter text-primary">{r.status}</span>
             </div>
           ))}
         </div>
 
-        <div className="card p-4">
-          <h3 className="font-bold text-gray-900 mb-3">Recent Enquiries</h3>
-          {data.recentLeads.length === 0 && <p className="text-sm text-gray-400 text-center py-6">No enquiries yet</p>}
+        <div className="rounded-2xl border border-gray-light bg-white shadow-card p-4">
+          <h3 className="font-bold text-ink mb-3">Recent Enquiries</h3>
+          {data.recentLeads.length === 0 && <p className="text-sm text-gray-main text-center py-6">No enquiries yet</p>}
           {data.recentLeads.map((l) => (
-            <div key={l.id} className="py-2 border-b border-gray-50 last:border-0">
-              <div className="text-sm font-semibold text-gray-800">{l.name} - {l.phone}</div>
-              <div className="text-xs text-gray-400">{l.page || 'General'} - {l.created_at}</div>
+            <div key={l.id} className="py-2 border-b border-gray-100 last:border-0">
+              <div className="text-sm font-semibold text-ink">{l.name} - {l.phone}</div>
+              <div className="text-xs text-gray-main">{l.page || 'General'} - {l.created_at}</div>
             </div>
           ))}
         </div>
@@ -123,10 +123,10 @@ function SellRequests() {
   if (error) return <p className="text-red-500 text-sm">{error}</p>;
 
   return (
-    <div className="card overflow-x-auto">
+    <div className="overflow-x-auto rounded-2xl border border-gray-light bg-white shadow-card">
       <table className="w-full text-sm min-w-[700px]">
-        <thead className="bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase">
-          <tr>
+        <thead>
+          <tr className="bg-header text-white text-left text-xs font-bold uppercase">
             <th className="p-3">Seller</th>
             <th className="p-3">Vehicle</th>
             <th className="p-3">Price</th>
@@ -138,21 +138,21 @@ function SellRequests() {
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r.id} className="border-t border-gray-100">
+            <tr key={r.id} className="border-b border-gray-100">
               <td className="p-3">
-                <div className="font-semibold text-gray-800">{r.name}</div>
-                <div className="text-xs text-gray-400">{r.phone}</div>
+                <div className="font-semibold text-ink">{r.name}</div>
+                <div className="text-xs text-gray-main">{r.phone}</div>
               </td>
-              <td className="p-3 font-semibold text-gray-800">{r.brand} {r.model}<div className="text-xs text-gray-400">Year {r.year} · {r.hours} hrs</div></td>
-              <td className="p-3 font-bold text-kheti-900">₹ {r.expected_price.toLocaleString('en-IN')}</td>
-              <td className="p-3 text-gray-600">{r.location}, {r.state}</td>
+              <td className="p-3 font-semibold text-ink">{r.brand} {r.model}<div className="text-xs text-gray-main">Year {r.year} · {r.hours} hrs</div></td>
+              <td className="p-3 font-bold text-primary">₹ {r.expected_price.toLocaleString('en-IN')}</td>
+              <td className="p-3 text-gray-main">{r.location}, {r.state}</td>
               <td className="p-3">
                 <select value={r.status} onChange={(e) => admin.updateSellStatus(r.id, e.target.value).then(load)}
-                  className="rounded-lg border border-gray-300 p-1.5 text-xs bg-white">
+                  className="rounded-lg border border-gray-light bg-white px-3 py-2 text-xs text-ink outline-none focus:border-green-main">
                   {SELL_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
               </td>
-              <td className="p-3 text-xs text-gray-400">{formatDate(r.created_at.slice(0, 10))}</td>
+              <td className="p-3 text-xs text-gray-main">{formatDate(r.created_at.slice(0, 10))}</td>
               <td className="p-3">
                 <button onClick={() => admin.remove('sell_requests', r.id).then(load)}
                   className="text-xs font-bold text-red-500 hover:underline">Delete</button>
@@ -171,19 +171,21 @@ function Leads() {
   useEffect(() => { load(); }, []);
   if (!rows) return <Spinner />;
   return (
-    <div className="card overflow-x-auto">
+    <div className="overflow-x-auto rounded-2xl border border-gray-light bg-white shadow-card">
       <table className="w-full text-sm min-w-[600px]">
-        <thead className="bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase">
-          <tr><th className="p-3">Name</th><th className="p-3">Phone</th><th className="p-3">Page</th><th className="p-3">Message</th><th className="p-3">Date</th><th className="p-3">Actions</th></tr>
+        <thead>
+          <tr className="bg-header text-white text-left text-xs font-bold uppercase">
+            <th className="p-3">Name</th><th className="p-3">Phone</th><th className="p-3">Page</th><th className="p-3">Message</th><th className="p-3">Date</th><th className="p-3">Actions</th>
+          </tr>
         </thead>
         <tbody>
           {rows.map((l) => (
-            <tr key={l.id} className="border-t border-gray-100">
-              <td className="p-3 font-semibold text-gray-800">{l.name}</td>
-              <td className="p-3 text-gray-600">{l.phone}</td>
-              <td className="p-3 text-xs text-kheti-900">{l.page || '-'}</td>
-              <td className="p-3 text-xs text-gray-500 max-w-[240px] truncate">{l.message || '-'}</td>
-              <td className="p-3 text-xs text-gray-400">{formatDate(l.created_at.slice(0, 10))}</td>
+            <tr key={l.id} className="border-b border-gray-100">
+              <td className="p-3 font-semibold text-ink">{l.name}</td>
+              <td className="p-3 text-gray-main">{l.phone}</td>
+              <td className="p-3 text-xs text-primary">{l.page || '-'}</td>
+              <td className="p-3 text-xs text-gray-main max-w-[240px] truncate">{l.message || '-'}</td>
+              <td className="p-3 text-xs text-gray-main">{formatDate(l.created_at.slice(0, 10))}</td>
               <td className="p-3">
                 <button onClick={() => admin.removeLead(l.id).then(load)} className="text-xs font-bold text-red-500 hover:underline">Delete</button>
               </td>
@@ -290,41 +292,41 @@ function TableAdmin({ table }) {
   if (!rows) return <Spinner />;
 
   return (
-    <div className="card overflow-x-auto p-4">
+    <div className="rounded-2xl border border-gray-light bg-white shadow-card p-4 overflow-x-auto">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold text-gray-900">{cfg.label}s ({rows.length})</h3>
-        <button onClick={() => { setEditing('new'); setForm(blank()); }} className="btn-primary text-sm">+ Add {cfg.label}</button>
+        <h3 className="font-bold text-ink">{cfg.label}s ({rows.length})</h3>
+        <button onClick={() => { setEditing('new'); setForm(blank()); }} className="btn-green-sm">+ Add {cfg.label}</button>
       </div>
 
       {(editing !== null) && (
-        <div className="bg-gray-50 rounded-xl p-4 mb-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="bg-green-lighter rounded-2xl border border-gray-light p-4 mb-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {cfg.fields.map(([k, type]) => {
             const val = type === 'brand' ? (brandName(form[k]) === form[k] ? form[k] : form[k]) : form[k];
             return (
               <div key={k}>
-                <label className="text-xs font-bold text-gray-500 uppercase block mb-1">{k}</label>
-                {type === 'textarea' && <textarea rows="2" value={form[k] || ''} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="w-full rounded-lg border border-gray-300 p-2 text-sm" />}
+                <label className="text-xs font-bold text-gray-main uppercase block mb-1">{k}</label>
+                {type === 'textarea' && <textarea rows="2" value={form[k] || ''} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="w-full rounded-lg border border-gray-light bg-white px-3 py-2 text-sm text-ink outline-none focus:border-green-main" />}
                 {type === 'checkbox' && <input type="checkbox" checked={!!form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.checked ? 1 : 0 })} className="mt-2 h-5 w-5" />}
                 {type === 'brand' && <BrandSelect value={form.brand_id || ''} onChange={(v) => setForm({ ...form, brand_id: v })} />}
-                {type === 'color' && <input type="color" value={form[k] || '#0f6b00'} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="h-10 w-full rounded-lg border border-gray-300" />}
-                {type === 'json' && <textarea rows="2" value={form[k] || ''} onChange={(e) => setForm({ ...form, [k]: e.target.value })} placeholder="One feature per line" className="w-full rounded-lg border border-gray-300 p-2 text-sm" />}
+                {type === 'color' && <input type="color" value={form[k] || '#0f6b00'} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="h-10 w-full rounded-lg border border-gray-light bg-white" />}
+                {type === 'json' && <textarea rows="2" value={form[k] || ''} onChange={(e) => setForm({ ...form, [k]: e.target.value })} placeholder="One feature per line" className="w-full rounded-lg border border-gray-light bg-white px-3 py-2 text-sm text-ink outline-none focus:border-green-main" />}
                 {!['textarea', 'checkbox', 'brand', 'color', 'json'].includes(type) && (
-                  <input type={type === 'number' ? 'number' : type === 'date' ? 'date' : 'text'} value={val ?? ''} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="w-full rounded-lg border border-gray-300 p-2 text-sm" />
+                  <input type={type === 'number' ? 'number' : type === 'date' ? 'date' : 'text'} value={val ?? ''} onChange={(e) => setForm({ ...form, [k]: e.target.value })} className="w-full rounded-lg border border-gray-light bg-white px-3 py-2 text-sm text-ink outline-none focus:border-green-main" />
                 )}
               </div>
             );
           })}
           <div className="sm:col-span-2 lg:col-span-3 flex gap-2">
             {error && <p className="text-red-500 text-xs self-center">{error}</p>}
-            <button onClick={save} className="btn-primary text-sm">{editing === 'new' ? 'Create' : 'Save Changes'}</button>
-            <button onClick={() => { setEditing(null); setForm({}); }} className="btn-outline text-sm">Cancel</button>
+            <button onClick={save} className="btn-green-sm">{editing === 'new' ? 'Create' : 'Save Changes'}</button>
+            <button onClick={() => { setEditing(null); setForm({}); }} className="btn-green-sm !bg-white !text-primary border border-primary hover:!bg-green-lighter">Cancel</button>
           </div>
         </div>
       )}
 
       <table className="w-full text-sm min-w-[600px]">
-        <thead className="bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase">
-          <tr>
+        <thead>
+          <tr className="bg-header text-white text-left text-xs font-bold uppercase">
             <th className="p-3">#</th>
             {cfg.cols.map((c) => <th key={c} className="p-3">{c}</th>)}
             <th className="p-3">Actions</th>
@@ -332,17 +334,17 @@ function TableAdmin({ table }) {
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={r.id} className="border-t border-gray-100">
-              <td className="p-3 text-gray-400">{i + 1}</td>
+            <tr key={r.id} className="border-b border-gray-100">
+              <td className="p-3 text-gray-main">{i + 1}</td>
               {cfg.cols.map((c) => {
                 let v = r[c];
                 if (c === 'brand_id') v = brandName(v);
                 if (c === 'is_popular' || c === 'is_latest' || c === 'is_mini') v = v ? 'Yes' : 'No';
                 if (typeof v === 'number' && c.toLowerCase().includes('price')) v = '₹ ' + v.toLocaleString('en-IN');
-                return <td key={c} className="p-3 text-gray-700 font-medium max-w-[200px] truncate">{String(v ?? '-')}</td>;
+                return <td key={c} className="p-3 text-ink font-medium max-w-[200px] truncate">{String(v ?? '-')}</td>;
               })}
               <td className="p-3 whitespace-nowrap">
-                <button onClick={() => startEdit(r)} className="text-xs font-bold text-kheti-900 hover:underline mr-3">Edit</button>
+                <button onClick={() => startEdit(r)} className="text-xs font-bold text-primary hover:text-secondary mr-3">Edit</button>
                 <button onClick={() => { if (confirm(`Delete ${cfg.label}?`)) admin.remove(table, r.id).then(load); }} className="text-xs font-bold text-red-500 hover:underline">Delete</button>
               </td>
             </tr>
@@ -362,7 +364,7 @@ function BrandSelect({ value, onChange }) {
     api.brands().then((b) => { brandList = b; b.forEach((x) => { brandCache[x.id] = x.name; }); setBrands(b); });
   }, []);
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full rounded-lg border border-gray-300 p-2 text-sm bg-white">
+    <select value={value} onChange={(e) => onChange(e.target.value)} className="w-full rounded-lg border border-gray-light bg-white px-3 py-2 text-sm text-ink outline-none focus:border-green-main">
       <option value="">Select Brand</option>
       {brands.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
     </select>

@@ -7,9 +7,9 @@ export default function Videos() {
   if (loading) return <Spinner />;
   return (
     <div className="container-x pt-6 pb-8">
-      <h1 className="text-xl font-extrabold text-gray-900">Tractor Videos</h1>
-      <p className="text-sm text-gray-500 mt-1">Reviews, comparisons and reels from the KhetiHub channel</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
+      <h1 className="sec-title mb-4 md:mb-6">Tractor Videos</h1>
+      <p className="text-sm text-gray-main">Reviews, comparisons and reels from the KhetiHub channel</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
         {data?.map((v) => <VideoCard key={v.id} video={v} />)}
       </div>
     </div>

@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import { api } from '../lib/api.js';
 import { useFetch } from '../lib/hooks.js';
-import { NewsCard, Spinner } from '../components/Cards.jsx';
+import { FeaturedNews, NewsRow, Spinner } from '../components/Cards.jsx';
 
 export default function News() {
   const { data, loading } = useFetch(api.news, []);
@@ -9,23 +8,23 @@ export default function News() {
   const [featured, ...rest] = data || [];
   return (
     <div className="container-x pt-6 pb-8">
-      <h1 className="text-xl font-extrabold text-gray-900">Tractor News</h1>
-      <p className="text-sm text-gray-500 mt-1">Latest tractor industry news, launches and agriculture updates</p>
+      <h1 className="sec-title mb-4 md:mb-6">Tractor News</h1>
+      <p className="text-sm text-gray-main">Latest tractor industry news, launches and agriculture updates</p>
 
       {featured && (
-        <Link to={`/news/${featured.slug}`} className="card mt-5 block">
-          <img src={featured.image} alt={featured.title} className="w-full h-44 object-cover" />
-          <div className="p-4">
-            <span className="text-[10px] font-semibold text-gray-400 uppercase">{featured.date}</span>
-            <h2 className="text-lg font-extrabold text-gray-900 mt-1 leading-snug line-clamp-2">{featured.title}</h2>
-            <p className="text-sm text-gray-500 mt-1.5 line-clamp-2">{featured.excerpt}</p>
+        <div className="grid md:grid-cols-2 gap-6 mt-6">
+          <FeaturedNews article={featured} index={1} />
+          <div className="space-y-3">
+            {rest.map((n, i) => <NewsRow key={n.id} article={n} index={i + 2} />)}
           </div>
-        </Link>
+        </div>
       )}
 
-      <div className="space-y-3 mt-4">
-        {rest.map((n) => <NewsCard key={n.id} article={n} horizontal />)}
-      </div>
+      {!featured && (
+        <div className="space-y-3 mt-6">
+          {rest.map((n, i) => <NewsRow key={n.id} article={n} index={i + 1} />)}
+        </div>
+      )}
     </div>
   );
 }
