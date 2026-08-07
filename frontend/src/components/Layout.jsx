@@ -142,8 +142,9 @@ const Drawer = ({ open, onClose }) => {
             );
           })}
         </div>
-        <div className="p-4 border-t border-gray-100">
+        <div className="p-4 border-t border-gray-100 space-y-2">
           <Link to="/sell" onClick={onClose} className="btn-green-sm w-full justify-center">Sell Your Tractor</Link>
+          <Link to="/partner" onClick={onClose} className="block w-full rounded-lg border border-primary py-2 text-center text-sm font-medium text-primary hover:bg-green-lighter transition">Partner With Us</Link>
         </div>
       </div>
     </>

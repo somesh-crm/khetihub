@@ -17,6 +17,7 @@ import News from './pages/News.jsx';
 import NewsDetail from './pages/NewsDetail.jsx';
 import Videos from './pages/Videos.jsx';
 import Admin from './pages/Admin.jsx';
+import Partner from './pages/Partner.jsx';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/news" element={<News />} />
         <Route path="/news/:slug" element={<NewsDetail />} />
         <Route path="/videos" element={<Videos />} />
+        <Route path="/partner" element={<Partner />} />
         <Route path="/admin" element={<Admin />} />
       </Route>
     </Routes>

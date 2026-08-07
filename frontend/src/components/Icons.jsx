@@ -32,3 +32,4 @@ export const IconHome = (p) => <svg {...S(p)}><path d="m3 9 9-7 9 7v11a2 2 0 0 1
 export const IconTractor = (p) => <svg {...S(p)}><path d="M3 17a4 4 0 1 0 8 0 4 4 0 0 0-8 0z" /><path d="M13 17a4 4 0 0 1 8 0" /><circle cx="7" cy="17" r="1.5" /><circle cx="17" cy="17" r="1.5" /><path d="M7 17h10" /><path d="M5 13h6l-1-3H6z" /><path d="M11 13l1-4 7 1 1 3" /><path d="M19 10V8h2l1 2" /></svg>;
 export const IconShare = (p) => <svg {...S(p)}><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>;
 export const IconFuel = (p) => <svg {...S(p)}><path d="M3 22h12" /><path d="M4 22V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v17" /><path d="M14 9h2a2 2 0 0 1 2 2v6a2 2 0 0 0 4 0V9l-4-4" /><line x1="10" y1="13" x2="10" y2="17" /></svg>;
+export const IconCheck = (p) => <svg {...S(p)}><polyline points="20 6 9 17 4 12" /></svg>;
